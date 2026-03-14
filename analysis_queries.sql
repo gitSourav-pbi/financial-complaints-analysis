@@ -5,6 +5,7 @@
 select product, COUNT(complaint_id) as total_complaints
 from consumer_complaints
 where product is not null
+and substr(date_received,7,4) IN ('2015','2016')
 group by product
 order by total_complaints desc
 limit 10;
@@ -13,6 +14,7 @@ limit 10;
 select company,count(complaint_id) as total_complaints
 from consumer_complaints
 where company is not null
+and substr(date_received,7,4) IN ('2015','2016')
 group by company
 order by total_complaints desc
 LIMIT 15;
@@ -25,6 +27,7 @@ round(sum(case when timely_response='Yes' then 1 else 0 end)* 100.0/Count(compla
 timely_response_pctge
 from consumer_complaints
 where company is not null
+and substr(date_received,7,4) IN ('2015','2016')
 group by company
 order by total_complaints desc
 
@@ -41,6 +44,8 @@ SELECT
 from consumer_complaints
 where product is not null
 and company is not null
+and substr(date_received,7,4) IN ('2015','2016')
 group by product, company
 order by product, company_rank
 LIMIT 650
+
